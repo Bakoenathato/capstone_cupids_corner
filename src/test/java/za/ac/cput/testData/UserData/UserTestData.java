@@ -1,11 +1,7 @@
 package za.ac.cput.testData.UserData;
 
-import za.ac.cput.domain.DisplayImage;
 import za.ac.cput.domain.Gender;
 import za.ac.cput.domain.User;
-import za.ac.cput.factory.DisplayImageFactory;
-import za.ac.cput.factory.UserFactory;
-import za.ac.cput.util.Helper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,10 +12,17 @@ import java.time.LocalDateTime;
 public class UserTestData {
     public static User getBuiltUser1()  {
 
-        byte[] sonicImage = "sonic".getBytes();
+        byte[] sonicImage;
+        try {
+            sonicImage = Files.readAllBytes(Paths.get("src/main/resources/images/sonic.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //byte[] sonicImage = "sonic".getBytes();
 
         return new User.Builder()
-                .setUserId(1l)
+                .setUserId(1L)
                 .setUserName("Sonic")
                 .setPassword("Seg@")
                 .setEmail("sonic0@sega.example.com")
@@ -32,10 +35,18 @@ public class UserTestData {
     }
 
     public static User getBuiltUser2() {
-        byte[] tailsImage = "tails".getBytes();
+
+        byte[] tailsImage;
+        try {
+            tailsImage = Files.readAllBytes(Paths.get("src/main/resources/images/tails.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //byte[] tailsImage = "tails".getBytes();
 
         return new User.Builder()
-                .setUserId(2l)
+                .setUserId(2L)
                 .setUserName("Tails")
                 .setPassword("MilesPrower")
                 .setEmail("tails1@sega.example.com")
@@ -48,9 +59,17 @@ public class UserTestData {
     }
 
     public static User getBuiltUser3() {
-        byte[] amyRoseImage = "amyRose".getBytes();
+
+        byte[] amyRoseImage;
+        try {
+            amyRoseImage = Files.readAllBytes(Paths.get("src/main/resources/images/amy.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //byte[] amyRoseImage = "amyRose".getBytes();
         return new User.Builder()
-                .setUserId(3l)
+                .setUserId(3L)
                 .setUserName("AmyRose")
                 .setPassword("PinkRose")
                 .setEmail("amy2@sega.example.com")
@@ -63,9 +82,17 @@ public class UserTestData {
     }
 
     public static User getBuiltUser4() {
-        byte[] rougeImage = "rougeBat".getBytes();
+
+        byte[] rougeImage;
+        try {
+            rougeImage = Files.readAllBytes(Paths.get("src/main/resources/images/rouge.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //byte[] rougeImage = "rougeBat".getBytes();
         return new User.Builder()
-                .setUserId(4l)
+                .setUserId(4L)
                 .setUserName("JewelThief")
                 .setPassword("Jewels1")
                 .setEmail("rouge@sega.example.com")
