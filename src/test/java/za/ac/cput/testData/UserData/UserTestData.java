@@ -30,7 +30,6 @@ public class UserTestData {
                 .setLastName("Hedgehog")
                 .setGender(Gender.MALE)
                 .setDisplayImage(sonicImage)
-                .setCreatedAt(LocalDateTime.now())
                 .build();
     }
 
@@ -54,7 +53,6 @@ public class UserTestData {
                 .setLastName("Prower")
                 .setGender(Gender.MALE)
                 .setDisplayImage(tailsImage)
-                .setCreatedAt(LocalDateTime.now())
                 .build();
     }
 
@@ -77,7 +75,6 @@ public class UserTestData {
                 .setLastName("Rose")
                 .setGender(Gender.FEMALE)
                 .setDisplayImage(amyRoseImage)
-                .setCreatedAt(LocalDateTime.now())
                 .build();
     }
 
@@ -100,7 +97,6 @@ public class UserTestData {
                 .setLastName("The Bat")
                 .setGender(Gender.FEMALE)
                 .setDisplayImage(rougeImage)
-                .setCreatedAt(LocalDateTime.now())
                 .build();
     }
 

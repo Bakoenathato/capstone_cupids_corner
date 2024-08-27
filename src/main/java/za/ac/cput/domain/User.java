@@ -33,8 +33,8 @@ public class User {
     @Column(length = 100000)
     private byte[] displayImage;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
+    @OneToOne(mappedBy = "userID", cascade = CascadeType.ALL)
+    private UserProfile userProfile;
 
     protected User(){
     }
@@ -46,9 +46,9 @@ public class User {
         this.email = builder.email;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
-        this.createdAt = builder.createdAt;
         this.gender = builder.gender;
         this.displayImage = builder.displayImage;
+        this.userProfile = builder.userProfile;
 
     }
 
@@ -82,34 +82,34 @@ public class User {
         return displayImage;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public UserProfile getUserProfile() {
+        return userProfile;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return getUserId() == user.getUserId() && Objects.equals(getUserName(), user.getUserName()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && getGender() == user.getGender() && Objects.deepEquals(getDisplayImage(), user.getDisplayImage()) && Objects.equals(getCreatedAt(), user.getCreatedAt());
+        return getUserId() == user.getUserId() && Objects.equals(getUserName(), user.getUserName()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && getGender() == user.getGender() && Objects.deepEquals(getDisplayImage(), user.getDisplayImage()) && Objects.equals(getUserProfile(), user.getUserProfile());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getUserName(), getPassword(), getEmail(), getFirstName(), getLastName(), getGender(), Arrays.hashCode(getDisplayImage()), getCreatedAt());
+        return Objects.hash(getUserId(), getUserName(), getPassword(), getEmail(), getFirstName(), getLastName(), getGender(), Arrays.hashCode(getDisplayImage()), getUserProfile());
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId='" + userId + '\'' +
+                "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
-                ", displayImage=" + displayImage +
-                ", createdAt=" + createdAt +
+                ", displayImage=" + Arrays.toString(displayImage) +
+                ", userProfile=" + userProfile +
                 '}';
     }
 
@@ -120,10 +120,9 @@ public class User {
         private String email;
         private String firstName;
         private String lastName;
-        private LocalDateTime createdAt;
         private Gender gender;
         private byte[] displayImage;
-
+        private UserProfile userProfile;
 
 
         public Builder setUserId(long userId) {
@@ -158,11 +157,6 @@ public class User {
             return this;
 
         }
-        public Builder setCreatedAt(LocalDateTime createdAt) {
-            this.createdAt = createdAt;
-            return this;
-
-        }
 
         public Builder setGender(Gender gender) {
             this.gender = gender;
@@ -174,16 +168,21 @@ public class User {
             return this;
         }
 
+        public Builder setUserProfile(UserProfile userProfile) {
+            this.userProfile = userProfile;
+            return this;
+        }
+
         public Builder copy(User user) {
-            this.userId = user.userId;
-            this.userName = user.userName;
-            this.password = user.password;
-            this.email = user.email;
-            this.firstName = user.firstName;
-            this.lastName = user.lastName;
-            this.createdAt = user.createdAt;
-            this.gender = user.gender;
-            this.displayImage = user.displayImage;
+            this.userId = user.getUserId();
+            this.userName = user.getUserName();
+            this.password = user.getPassword();
+            this.email = user.getEmail();
+            this.firstName = user.getFirstName();
+            this.lastName = user.getLastName();
+            this.gender = user.getGender();
+            this.displayImage = user.getDisplayImage();
+            this.userProfile = user.getUserProfile();
             return this;
         }
 

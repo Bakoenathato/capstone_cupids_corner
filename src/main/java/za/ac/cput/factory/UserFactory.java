@@ -3,6 +3,7 @@ package za.ac.cput.factory;
 import za.ac.cput.domain.DisplayImage;
 import za.ac.cput.domain.Gender;
 import za.ac.cput.domain.User;
+import za.ac.cput.domain.UserProfile;
 import za.ac.cput.util.Helper;
 
 import java.time.LocalDateTime;
@@ -29,10 +30,10 @@ public class UserFactory {
 //                .build();
 //    }
     public static User buildUser(String userName, String password, String email, String firstName,
-                                 String lastName, Gender gender, byte[] displayImage, LocalDateTime createdAt){
+                                 String lastName, Gender gender, byte[] displayImage, UserProfile  userProfile) {
         if (Helper.isNullOrEmpty(userName) || Helper.isNullOrEmpty(password) || Helper.isNullOrEmpty(email) ||
                 Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName) ||
-                gender == null || displayImage == null || createdAt == null)
+                gender == null || displayImage == null)
             throw new IllegalArgumentException("Invalid user data");
 
         return new User.Builder()
@@ -42,6 +43,7 @@ public class UserFactory {
                 .setFirstName(firstName).setLastName(lastName)
                 .setGender(gender)
                 .setDisplayImage(displayImage)
+                .setUserProfile(userProfile)
                 .build();
 
     }

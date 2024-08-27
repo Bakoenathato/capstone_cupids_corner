@@ -20,7 +20,7 @@ public class Preference {
     private long preferenceId;
 
     @OneToOne
-    @JoinColumn(name = "profile_id", nullable = false)
+    @JoinColumn(name = "profile_id", nullable = true)
     private UserProfile profile;
 
     private int minAge;
