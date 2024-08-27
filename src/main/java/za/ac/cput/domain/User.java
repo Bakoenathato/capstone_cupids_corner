@@ -30,7 +30,6 @@ public class User {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(length = 100000)
     private byte[] displayImage;
 
     @CreatedDate
