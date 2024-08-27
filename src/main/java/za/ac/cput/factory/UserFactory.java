@@ -1,6 +1,6 @@
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.DisplayImage;
+//import za.ac.cput.domain.DisplayImage;
 import za.ac.cput.domain.Gender;
 import za.ac.cput.domain.User;
 import za.ac.cput.domain.UserProfile;
