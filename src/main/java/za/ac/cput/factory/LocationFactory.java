@@ -6,12 +6,11 @@ import za.ac.cput.util.Helper;
 
 public class LocationFactory {
 
-    public static Location createLocation(Long postalCode, String city, String province, String area, UserProfile userProfile) {
-        if (postalCode == null || Helper.isNullOrEmpty(city) || Helper.isNullOrEmpty(province)
+    public static Location createLocation(String city, String province, String area, UserProfile userProfile) {
+        if ( Helper.isNullOrEmpty(city) || Helper.isNullOrEmpty(province)
                 || Helper.isNullOrEmpty(area) || userProfile == null)
             return null;
         return new Location.Builder()
-                .setPostalCode(postalCode)
                 .setCity(city)
                 .setProvince(province)
                 .setArea(area)

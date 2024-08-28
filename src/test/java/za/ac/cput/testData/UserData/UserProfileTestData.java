@@ -24,7 +24,6 @@ public class UserProfileTestData {
         Location location101 = LocationTestData.getLocationBuilder1();
 
         return new UserProfile.Builder()
-                .setProfileID(Helper.generateId())
                 .setUserID(user101)
                 .setInterests("Running fast")
                 .setProfile_visibility(true)
@@ -44,7 +43,6 @@ public class UserProfileTestData {
         Location location2 = LocationTestData.getLocationBuilder2();
 
         return new UserProfile.Builder()
-                .setProfileID(Helper.generateId())
                 .setUserID(user2)
                 .setInterests("Adventuring and exploring")
                 .setProfile_visibility(true)
@@ -64,7 +62,6 @@ public class UserProfileTestData {
         Location location3 = LocationTestData.getLocationBuilder3();
 
         return new UserProfile.Builder()
-                .setProfileID(Helper.generateId())
                 .setUserID(user3)
                 .setInterests("Collecting roses")
                 .setProfile_visibility(true)
@@ -84,7 +81,6 @@ public class UserProfileTestData {
         Location location4 = LocationTestData.getLocationBuilder4();
 
         return new UserProfile.Builder()
-                .setProfileID(Helper.generateId())
                 .setUserID(user4)
                 .setInterests("Stealing jewels")
                 .setProfile_visibility(true)

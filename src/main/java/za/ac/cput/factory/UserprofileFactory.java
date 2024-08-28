@@ -16,7 +16,7 @@ import java.util.Set;
 public class UserprofileFactory {
     // updated create user profile
     public static UserProfile createUserProfile(
-            String profileID,
+            int profileID,
             User userID,
             String interests,
             boolean profileVisibility,
@@ -27,11 +27,11 @@ public class UserprofileFactory {
             Set<Match> matchRequest,
             Set<Match> matchedAccepted,
             List<Swipe> swipes){
-        if (Helper.isNullOrEmpty(profileID) || userID == null || Helper.isNullOrEmpty(interests) || createdAt == null || location == null || preference == null || receivedLikes == null) {
+        if (profileID <= 0 || userID == null || Helper.isNullOrEmpty(interests) || createdAt == null) {
             return null;
         }
 
-
+        receivedLikes = (receivedLikes == null) ? new HashSet<>() : receivedLikes;
         matchRequest = (matchRequest == null) ? new HashSet<>() : matchRequest;
         matchedAccepted = (matchedAccepted == null) ? new HashSet<>() : matchedAccepted;
         swipes = (swipes == null) ? new ArrayList<>() : swipes;

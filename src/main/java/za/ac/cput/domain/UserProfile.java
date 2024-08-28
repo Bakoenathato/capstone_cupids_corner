@@ -18,10 +18,11 @@ import java.util.Set;
 @DiscriminatorValue("userprofile")
 public class UserProfile {
     @Id
-    private String profileID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int profileID;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userID")
+    @OneToOne
+    @JoinColumn(name = "userID", nullable = false)
     private User userID;
 
     private String Interests;
@@ -31,11 +32,11 @@ public class UserProfile {
     private LocalDateTime created_at;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "locationID")
+    @JoinColumn(name = "locationID", nullable = true)
     protected Location location;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "preferenceID")
+    @JoinColumn(name = "preferenceID", nullable = true)
     private Preference preferenceID;
 
     @OneToMany(mappedBy = "likedProfile", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -67,7 +68,7 @@ public class UserProfile {
         this.swipes = builder.swipes;
     }
 
-    public String getProfileID() {
+    public int getProfileID() {
         return profileID;
     }
 
@@ -145,7 +146,7 @@ public class UserProfile {
     }
 
     public static class Builder {
-        private String profileID;
+        private int profileID;
         private User userID;
         private String Interests;
         private boolean profile_visibility;
@@ -157,7 +158,7 @@ public class UserProfile {
         private Set<Match> matchedAccepted;
         private List<Swipe> swipes;
 
-        public Builder setProfileID(String profileID) {
+        public Builder setProfileID(int profileID) {
             this.profileID = profileID;
             return this;
         }

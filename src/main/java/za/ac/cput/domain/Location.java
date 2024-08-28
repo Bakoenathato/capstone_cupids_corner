@@ -110,11 +110,11 @@ public class Location {
         }
 
         public Builder copy(Location location) {
-            this.postalCode = location.postalCode;
-            this.city = location.city;
-            this.province = location.province;
-            this.area = location.area;
-            this.userProfile = location.userProfile;
+            this.postalCode = location.getPostalCode();
+            this.city = location.getCity();
+            this.province = location.getProvince();
+            this.area = location.getArea();
+            this.userProfile = location.getUserProfile();
             return this;
         }
 

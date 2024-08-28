@@ -21,7 +21,7 @@ public class UserprofileService implements IUserprofileService{
     }
 
     @Override
-    public UserProfile read(String profileID) {
+    public UserProfile read(Integer profileID) {
         return repository.findById(profileID).orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class UserprofileService implements IUserprofileService{
     }
 
     @Override
-    public void delete(String profileId) {
+    public void delete(Integer profileId) {
         repository.deleteById(profileId);
     }
 

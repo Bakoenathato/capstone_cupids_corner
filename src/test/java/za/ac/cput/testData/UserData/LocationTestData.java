@@ -7,25 +7,25 @@ public class LocationTestData {
 
     public static Location getLocationBuilder1() {
         return new Location.Builder()
-                .setPostalCode(1401L)
+                .setPostalCode(1l)
                 .setCity("Springs")
                 .setProvince("GrandBlue")
                 .setArea("EastBlue")
+                .setUserProfile(null)
                 .build();
     }
 
     public static Location getLocationBuilder2() {
         return new Location.Builder()
-                .setPostalCode(1402L)
                 .setCity("Valley")
                 .setProvince("GreenField")
                 .setArea("WestSide")
+                .setUserProfile(null)
                 .build();
     }
 
     public static Location getLocationBuilder3() {
         return new Location.Builder()
-                .setPostalCode(1403L)
                 .setCity("Mountain")
                 .setProvince("HighPeak")
                 .setArea("NorthRange")
@@ -34,7 +34,6 @@ public class LocationTestData {
 
     public static Location getLocationBuilder4() {
         return new Location.Builder()
-                .setPostalCode(1404L)
                 .setCity("Desert")
                 .setProvince("SandDune")
                 .setArea("SouthArea")
