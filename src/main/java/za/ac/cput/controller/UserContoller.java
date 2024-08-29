@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserContoller {
     @Autowired
     private UserService userService;
@@ -17,6 +18,7 @@ public class UserContoller {
         return userService.create(user);
     }
     @GetMapping("/read/{userId}")
+
     public User read(@PathVariable long userId){
         return userService.read(userId);
     }
