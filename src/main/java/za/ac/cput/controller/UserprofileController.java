@@ -22,17 +22,19 @@ public class UserprofileController {
     public UserProfile read(@RequestBody UserProfile userProfile){
         return userprofileService.create(userProfile);
     }
+
     @GetMapping("/read/{profileID}")
-    public UserProfile read(@PathVariable String profileID){
+    public UserProfile read(@PathVariable Integer profileID){
         return userprofileService.read(profileID);
     }
     @PostMapping("/update")
     public UserProfile update(@RequestBody UserProfile userProfile){
         return userprofileService.update(userProfile);
     }
+
     @GetMapping("/getall")
     public List<UserProfile>getall(){
-        return userprofileService.getall();
+        return userprofileService.getAll();
     }
 
 
