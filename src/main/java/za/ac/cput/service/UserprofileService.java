@@ -36,7 +36,7 @@ public class UserprofileService implements IUserprofileService{
     }
 
     @Override
-    public List<UserProfile> getall() {
+    public List<UserProfile> getAll() {
         return repository.findAll();
     }
 }
