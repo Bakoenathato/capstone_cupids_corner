@@ -20,8 +20,13 @@ public class UserContoller {
     private UserService userService;
 
     @PostMapping("/create")
-    public User read(@RequestBody User user){
-        return userService.create(user);
+    public ResponseEntity<?> create(@RequestBody User user) {
+        try {
+            User createdUser = userService.create(user);
+            return ResponseEntity.ok(createdUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/read/{userId}")
