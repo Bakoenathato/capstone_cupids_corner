@@ -22,6 +22,13 @@ public class UserService implements IUserService{
 
     @Override
     public User create(User user) {
+
+        if (repository.findByEmail(user.getEmail()) != null) {
+            throw new IllegalArgumentException("There is already a user with this email in the system please try to login");
+        }
+        if (repository.findByUserName(user.getUserName()) != null) {
+            throw new IllegalArgumentException("There is already a user with this username please try anothor one or log in");
+        }
         return repository.save(user);
     }
 
