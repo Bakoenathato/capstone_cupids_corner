@@ -42,14 +42,6 @@ public class UserProfile {
     @OneToMany(mappedBy = "likedProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Like> receivedLikes = new HashSet<>();
 
-    @OneToMany(mappedBy = "profile1", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Match> matchRequest = new HashSet<>();
-
-    @OneToMany(mappedBy = "profile2", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Match> matchedAccepted = new HashSet<>();
-
-    @OneToMany(mappedBy = "swiper", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Swipe> swipes;
 
     protected UserProfile() {
     }
@@ -63,9 +55,6 @@ public class UserProfile {
         this.location = builder.location;
         this.preferenceID = builder.preferenceID;;
         this.receivedLikes = builder.receivedLikes;
-        this.matchRequest = builder.matchRequest;
-        this.matchedAccepted = builder.matchedAccepted;
-        this.swipes = builder.swipes;
     }
 
     public int getProfileID() {
@@ -104,34 +93,24 @@ public class UserProfile {
         return preferenceID;
     }
 
-    public Set<Match> getMatchRequest() {
-        return matchRequest;
-    }
 
-    public Set<Match> getMatchedAccepted() {
-        return matchedAccepted;
-    }
-
-    public List<Swipe> getSwipes() {
-        return swipes;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserProfile profile)) return false;
-        return isProfile_visibility() == profile.isProfile_visibility() && Objects.equals(getProfileID(), profile.getProfileID()) && Objects.equals(getUserID(), profile.getUserID()) && Objects.equals(getInterests(), profile.getInterests()) && Objects.equals(getCreated_at(), profile.getCreated_at()) && Objects.equals(getLocation(), profile.getLocation()) && Objects.equals(getPreferenceID(), profile.getPreferenceID()) && Objects.equals(getReceivedLikes(), profile.getReceivedLikes()) && Objects.equals(getMatchRequest(), profile.getMatchRequest()) && Objects.equals(getMatchedAccepted(), profile.getMatchedAccepted()) && Objects.equals(getSwipes(), profile.getSwipes());
+        if (!(o instanceof UserProfile that)) return false;
+        return getProfileID() == that.getProfileID() && isProfile_visibility() == that.isProfile_visibility() && Objects.equals(getUserID(), that.getUserID()) && Objects.equals(getInterests(), that.getInterests()) && Objects.equals(getCreated_at(), that.getCreated_at()) && Objects.equals(getLocation(), that.getLocation()) && Objects.equals(getPreferenceID(), that.getPreferenceID()) && Objects.equals(getReceivedLikes(), that.getReceivedLikes());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getProfileID(), getUserID(), getInterests(), isProfile_visibility(), getCreated_at(), getLocation(), getPreferenceID(), getReceivedLikes(), getMatchRequest(), getMatchedAccepted(), getSwipes());
+        return Objects.hash(getProfileID(), getUserID(), getInterests(), isProfile_visibility(), getCreated_at(), getLocation(), getPreferenceID(), getReceivedLikes());
     }
 
     @Override
     public String toString() {
         return "UserProfile{" +
-                "profileID='" + profileID + '\'' +
+                "profileID=" + profileID +
                 ", userID=" + userID +
                 ", Interests='" + Interests + '\'' +
                 ", profile_visibility=" + profile_visibility +
@@ -139,9 +118,6 @@ public class UserProfile {
                 ", location=" + location +
                 ", preferenceID=" + preferenceID +
                 ", receivedLikes=" + receivedLikes +
-                ", matchRequest=" + matchRequest +
-                ", matchedAccepted=" + matchedAccepted +
-                ", swipes=" + swipes +
                 '}';
     }
 
@@ -154,9 +130,6 @@ public class UserProfile {
         private Location location;
         private Preference preferenceID;
         private Set<Like> receivedLikes;
-        private Set<Match> matchRequest;
-        private Set<Match> matchedAccepted;
-        private List<Swipe> swipes;
 
         public Builder setProfileID(int profileID) {
             this.profileID = profileID;
@@ -198,20 +171,6 @@ public class UserProfile {
             return this;
         }
 
-        public Builder setMatchRequest(Set<Match> matchRequest) {
-            this.matchRequest = matchRequest;
-            return this;
-        }
-
-        public Builder setMatchedAccepted(Set<Match> matchedAccepted) {
-            this.matchedAccepted = matchedAccepted;
-            return this;
-        }
-
-        public Builder setSwipes(List<Swipe> swipes) {
-            this.swipes = swipes;
-            return this;
-        }
 
         public Builder copy(UserProfile e) {
         this.profileID = e.profileID;
@@ -222,9 +181,6 @@ public class UserProfile {
         this.location= e.location;
         this.preferenceID=e.preferenceID;
         this.receivedLikes=e.receivedLikes;
-        this.matchRequest=e.matchRequest;
-        this.matchedAccepted=e.matchedAccepted;
-        this.swipes=e.swipes;
         return this;
     }
 

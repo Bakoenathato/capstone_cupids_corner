@@ -31,9 +31,6 @@ public class UserProfileTestData {
                 .setLocation(location101)
                 .setPreferenceID(preference101)
                 .setReceivedLikes(new HashSet<>()) // likes
-                .setMatchedAccepted(new HashSet<>()) // match accepted
-                .setMatchRequest(new HashSet<>()) // match requested
-                .setSwipes(new ArrayList<>())
                 .build();
     }
 
@@ -50,9 +47,6 @@ public class UserProfileTestData {
                 .setLocation(location2)
                 .setPreferenceID(preference2)
                 .setReceivedLikes(new HashSet<>()) // likes
-                .setMatchedAccepted(new HashSet<>()) // match accepted
-                .setMatchRequest(new HashSet<>()) // match requested
-                .setSwipes(new ArrayList<>())
                 .build();
     }
 
@@ -69,9 +63,6 @@ public class UserProfileTestData {
                 .setLocation(location3)
                 .setPreferenceID(preference3)
                 .setReceivedLikes(new HashSet<>()) // likes
-                .setMatchedAccepted(new HashSet<>()) // match accepted
-                .setMatchRequest(new HashSet<>()) // match requested
-                .setSwipes(new ArrayList<>())
                 .build();
     }
 
@@ -88,9 +79,6 @@ public class UserProfileTestData {
                 .setLocation(location4)
                 .setPreferenceID(preference4)
                 .setReceivedLikes(new HashSet<>()) // likes
-                .setMatchedAccepted(new HashSet<>()) // match accepted
-                .setMatchRequest(new HashSet<>()) // match requested
-                .setSwipes(new ArrayList<>())
                 .build();
     }
 

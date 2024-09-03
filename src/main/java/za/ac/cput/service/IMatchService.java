@@ -7,9 +7,12 @@ package za.ac.cput.service;
 */
 
 import za.ac.cput.domain.Match;
+import za.ac.cput.domain.User;
 
 import java.util.List;
 
-public interface IMatchService extends IService<Match, Integer> {
+public interface IMatchService extends IService<Match, Long> {
     List<Match> getAll();
+
+    Match createMatch(User profile1, User profile2);
 }

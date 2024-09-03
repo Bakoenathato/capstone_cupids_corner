@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
+@Table(name = "user_like")
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

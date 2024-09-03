@@ -30,10 +30,10 @@ public class UserFactory {
 //                .build();
 //    }
     public static User buildUser(String userName, String password, String email, String firstName,
-                                 String lastName, Gender gender, byte[] displayImage, UserProfile  userProfile) {
+                                 String lastName, Gender gender, byte[] displayImage) {
         if (Helper.isNullOrEmpty(userName) || Helper.isNullOrEmpty(password) || Helper.isNullOrEmpty(email) ||
                 Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName) ||
-                gender == null || displayImage == null)
+                gender == null)
             throw new IllegalArgumentException("Invalid user data");
 
         return new User.Builder()
@@ -43,7 +43,6 @@ public class UserFactory {
                 .setFirstName(firstName).setLastName(lastName)
                 .setGender(gender)
                 .setDisplayImage(displayImage)
-                .setUserProfile(userProfile)
                 .build();
 
     }

@@ -13,12 +13,12 @@ public class Swipe {
     private long swipeId;
 
     @ManyToOne
-    @JoinColumn(name = "user_profile_id")
-    private UserProfile swiper; // person who performed the swipe
+    @JoinColumn(name = "swiper_id")
+    private User swiper; // person who made the swipe
 
     @ManyToOne
-    @JoinColumn(name = "swiped_profile_id")
-    private UserProfile swipedProfile; // profile that was swiped on
+    @JoinColumn(name = "swiped_id")
+    private User swiped; // profile that was swiped on
 
     @Enumerated(EnumType.STRING)
     private SwipeDirection direction; // left or right swipe
@@ -31,7 +31,7 @@ public class Swipe {
     private Swipe(Builder builder) {
         this.swipeId = builder.swipeId;
         this.swiper = builder.swiper;
-        this.swipedProfile = builder.swipedProfile;
+        this.swiped = builder.swiped;
         this.direction = builder.direction;
         this.swipeTime = builder.swipeTime;
     }
@@ -40,12 +40,12 @@ public class Swipe {
         return swipeId;
     }
 
-    public UserProfile getSwiper() {
+    public User getSwiper() {
         return swiper;
     }
 
-    public UserProfile getSwipedProfile() {
-        return swipedProfile;
+    public User getSwiped() {
+        return swiped;
     }
 
     public SwipeDirection getDirection() {
@@ -60,12 +60,12 @@ public class Swipe {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Swipe swipe)) return false;
-        return getSwipeId() == swipe.getSwipeId() && Objects.equals(getSwiper(), swipe.getSwiper()) && Objects.equals(getSwipedProfile(), swipe.getSwipedProfile()) && getDirection() == swipe.getDirection() && Objects.equals(getSwipeTime(), swipe.getSwipeTime());
+        return getSwipeId() == swipe.getSwipeId() && Objects.equals(getSwiper(), swipe.getSwiper()) && Objects.equals(getSwiped(), swipe.getSwiped()) && getDirection() == swipe.getDirection() && Objects.equals(getSwipeTime(), swipe.getSwipeTime());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSwipeId(), getSwiper(), getSwipedProfile(), getDirection(), getSwipeTime());
+        return Objects.hash(getSwipeId(), getSwiper(), getSwiped(), getDirection(), getSwipeTime());
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Swipe {
         return "Swipe{" +
                 "swipeId=" + swipeId +
                 ", swiper=" + swiper +
-                ", swipedProfile=" + swipedProfile +
+                ", swiped=" + swiped +
                 ", direction=" + direction +
                 ", swipeTime=" + swipeTime +
                 '}';
@@ -81,8 +81,8 @@ public class Swipe {
 
     public static class Builder {
         private long swipeId;
-        private UserProfile swiper;
-        private UserProfile swipedProfile;
+        private User swiper;
+        private User swiped;
         private SwipeDirection direction;
         private Instant swipeTime;
 
@@ -96,13 +96,13 @@ public class Swipe {
             return this;
         }
 
-        public Builder setSwiper(UserProfile swiper) {
+        public Builder setSwiper(User swiper) {
             this.swiper = swiper;
             return this;
         }
 
-        public Builder setSwipedProfile(UserProfile swipedProfile) {
-            this.swipedProfile = swipedProfile;
+        public Builder setSwiped(User swiped) {
+            this.swiped = swiped;
             return this;
         }
 
@@ -112,11 +112,11 @@ public class Swipe {
         }
 
         public Builder copy(Swipe swipe) {
-            this.swipeId = swipe.getSwipeId();
-            this.swiper = swipe.getSwiper();
-            this.swipedProfile = swipe.getSwipedProfile();
-            this.direction = swipe.getDirection();
-            this.swipeTime = swipe.getSwipeTime();
+            this.swipeId = swipe.swipeId;
+            this.swiper = swipe.swiper;
+            this.swiped = swipe.swiped;
+            this.direction = swipe.direction;
+            this.swipeTime = swipe.swipeTime;
             return this;
         }
 
