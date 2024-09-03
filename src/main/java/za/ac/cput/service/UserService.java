@@ -2,34 +2,43 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import za.ac.cput.domain.User;
 import za.ac.cput.repository.UserRepository;
+import za.ac.cput.util.LoginDTO;
+import za.ac.cput.util.LoginResponse;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserService implements IUserService {
+public class UserService implements IUserService{
     private UserRepository repository;
 
     @Autowired
-    UserService(UserRepository repository) {
+    UserService(UserRepository repository){
         this.repository = repository;
     }
 
+
     @Override
     public User create(User user) {
+
+        if (repository.findByEmail(user.getEmail()) != null) {
+            throw new IllegalArgumentException("There is already a user with this email in the system please try to login");
+        }
+        if (repository.findByUserName(user.getUserName()) != null) {
+            throw new IllegalArgumentException("There is already a user with this username please try anothor one or log in");
+        }
         return repository.save(user);
     }
 
     @Override
-    public User read(Long userId) {
+    public User read(Long userId){
         return repository.findById(userId).orElse(null);
     }
 
     @Override
-    public User update(User user) {
+    public User update(User user){
         return repository.save(user);
     }
 
@@ -39,37 +48,28 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll(){
         return repository.findAll();
     }
 
-    //    public User addUserWithImage(User user, MultipartFile imageFile) throws IOException {
-//        if (imageFile != null && !imageFile.isEmpty()) {
-//            user(imageFile.getBytes());
-//        }
-//        return repository.save(user);
-//    }
-    public User addUserWithImage(User user, MultipartFile imageFile) throws IOException {
-
-        User updatedUser = new User.Builder()
-                .setUserId(user.getUserId())
-                .setUserName(user.getUserName())
-                .setPassword(user.getPassword())
-                .setEmail(user.getEmail())
-                .setFirstName(user.getFirstName())
-                .setLastName(user.getLastName())
-                .setGender(user.getGender())
-                .setCreatedAt(user.getCreatedAt())
-                .setDisplayImage(imageFile != null && !imageFile.isEmpty() ? imageFile.getBytes() : user.getDisplayImage())
-                .build();
-
-        return repository.save(updatedUser);
+    public LoginResponse loginUser(LoginDTO loginDTO) {
+        User user1 = repository.findByEmail(loginDTO.getEmail());
+        if (user1 != null) {
+            String password = loginDTO.getPassword();
+            String storedPassword = user1.getPassword();
+            if (password.equals(storedPassword)) {
+                Optional<User> user = repository.findOneByEmailAndPassword(loginDTO.getEmail(), storedPassword);
+                if (user.isPresent()) {
+                    return new LoginResponse("Login Success", true);
+                } else {
+                    return new LoginResponse("Login Failed", false);
+                }
+            } else {
+                return new LoginResponse("Password Not Match", false);
+            }
+        } else {
+            return new LoginResponse("Email not exists", false);
+        }
     }
-//    public User addUserWithBase64Image(User user, String base64Image) {
-//        if (base64Image != null && !base64Image.isEmpty()) {
-//            byte[] imageBytes = java.util.Base64.getDecoder().decode(base64Image);
-//            user.setDisplayImage(imageBytes);
-//        }
-//        return repository.save(user);
-//    }
+
 }
