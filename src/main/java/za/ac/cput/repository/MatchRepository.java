@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Match;
 
 @Repository
-public interface MatchRepository extends JpaRepository<Match, Integer> {
+public interface MatchRepository extends JpaRepository<Match, Long> {
+
 }

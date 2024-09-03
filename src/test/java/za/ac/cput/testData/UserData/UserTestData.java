@@ -16,7 +16,12 @@ import java.time.LocalDateTime;
 public class UserTestData {
     public static User getBuiltUser1()  {
 
-        byte[] sonicImage = "sonic".getBytes();
+        byte[] sonicImage;
+        try {
+            sonicImage = Files.readAllBytes(Paths.get("src/main/resources/images/sonic.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         return new User.Builder()
                 .setUserId(1l)
@@ -31,7 +36,12 @@ public class UserTestData {
     }
 
     public static User getBuiltUser2() {
-        byte[] tailsImage = "tails".getBytes();
+        byte[] tailsImage;
+        try {
+            tailsImage = Files.readAllBytes(Paths.get("src/main/resources/images/tails.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         return new User.Builder()
                 .setUserId(2l)
@@ -46,7 +56,15 @@ public class UserTestData {
     }
 
     public static User getBuiltUser3() {
-        byte[] amyRoseImage = "amyRose".getBytes();
+
+        byte[] amyRoseImage;
+        try {
+            amyRoseImage = Files.readAllBytes(Paths.get("src/main/resources/images/amy.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         return new User.Builder()
                 .setUserId(3l)
                 .setUserName("AmyRose")
@@ -60,7 +78,13 @@ public class UserTestData {
     }
 
     public static User getBuiltUser4() {
-        byte[] rougeImage = "rougeBat".getBytes();
+
+        byte[] rougeImage;
+        try {
+            rougeImage = Files.readAllBytes(Paths.get("src/main/resources/images/rouge.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return new User.Builder()
                 .setUserId(4l)
                 .setUserName("JewelThief")

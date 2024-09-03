@@ -14,21 +14,24 @@ import java.util.Objects;
 // unique constraint to prevent duplicate matches.
 @Entity
 @Table(name = "matches", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"profileID_1", "profileID2"})
+        @UniqueConstraint(columnNames = {"profileID_1", "profileID_2"})
 })
 public class Match {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int matchId;
+    private long matchId;
 
     @ManyToOne
-    @JoinColumn(name = "profileID_1")
-    private UserProfile profile1;
+    @JoinColumn(name = "profileID_1", referencedColumnName = "userID")
+    private User profile1;
 
     @ManyToOne
-    @JoinColumn(name = "profileID_2")
-    private UserProfile profile2;
+    @JoinColumn(name = "profileID_2", referencedColumnName = "userID")
+    private User profile2;
+
+    @Enumerated(EnumType.STRING)
+    private MatchStatus status;
 
     protected Match() {
     }
@@ -37,66 +40,78 @@ public class Match {
         this.matchId = builder.matchId;
         this.profile1 = builder.profile1;
         this.profile2 = builder.profile2;
+        this.status = builder.status;
     }
 
-    public int getMatchId() {
+    public long getMatchId() {
         return matchId;
     }
 
-    public UserProfile getProfile1() {
+    public User getProfile1() {
         return profile1;
     }
 
-    public UserProfile getProfile2() {
+    public User getProfile2() {
         return profile2;
+    }
+
+    public MatchStatus getStatus() {
+        return status;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Match match)) return false;
-        return getMatchId() == match.getMatchId() && Objects.equals(getProfile1(), match.getProfile1()) && Objects.equals(getProfile2(), match.getProfile2());
+        return getMatchId() == match.getMatchId() && Objects.equals(getProfile1(), match.getProfile1()) && Objects.equals(getProfile2(), match.getProfile2()) && getStatus() == match.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getMatchId(), getProfile1(), getProfile2());
+        return Objects.hash(getMatchId(), getProfile1(), getProfile2(), getStatus());
     }
 
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "Match{" +
                 "matchId=" + matchId +
                 ", profile1=" + profile1 +
                 ", profile2=" + profile2 +
+                ", status=" + status +
                 '}';
     }
 
     public static class Builder {
-        private int matchId;
-        private UserProfile profile1;
-        private UserProfile profile2;
+        private long matchId;
+        private User profile1;
+        private User profile2;
+        private MatchStatus status;
 
-        public Builder setMatchId(int matchId) {
+        public Builder setMatchId(long matchId) {
             this.matchId = matchId;
             return this;
         }
 
-        public Builder setProfile1(UserProfile profile1) {
+        public Builder setProfile1(User profile1) {
             this.profile1 = profile1;
             return this;
         }
 
-        public Builder setProfile2(UserProfile profile2) {
+        public Builder setProfile2(User profile2) {
             this.profile2 = profile2;
             return this;
         }
 
+        public Builder setStatus(MatchStatus status) {
+            this.status = status;
+            return this;
+        }
+
         public Builder copy(Match match){
-            this.setMatchId(match.getMatchId());
-            this.setProfile1(match.getProfile1());
-            this.setProfile2(match.getProfile2());
+            this.matchId = match.matchId;
+            this.profile1 = match.profile1;
+            this.profile2 = match.profile2;
+            this.status = match.status;
             return this;
         }
 

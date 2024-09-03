@@ -8,17 +8,20 @@ package za.ac.cput.factory;
 */
 
 import za.ac.cput.domain.Match;
+import za.ac.cput.domain.MatchStatus;
+import za.ac.cput.domain.User;
 import za.ac.cput.domain.UserProfile;
 import za.ac.cput.util.Helper;
 
 public class MatchFactory {
-    public static Match buildMatch(int matchId, UserProfile profile1, UserProfile profile2) {
-        if (Helper.isZero(matchId) || profile1 == null || profile2 == null)
+    public static Match buildMatch(User profile1, User profile2, MatchStatus status) {
+        if (profile1 == null || profile2 == null || status == null)
             return null;
 
-        return new Match.Builder().setMatchId(matchId)
+        return new Match.Builder()
                 .setProfile1(profile1)
                 .setProfile2(profile2)
+                .setStatus(status)
                 .build();
     }
 }

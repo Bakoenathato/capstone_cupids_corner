@@ -2,13 +2,16 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.domain.Match;
 import za.ac.cput.domain.User;
 import za.ac.cput.repository.UserRepository;
 import za.ac.cput.util.LoginDTO;
 import za.ac.cput.util.LoginResponse;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService implements IUserService{

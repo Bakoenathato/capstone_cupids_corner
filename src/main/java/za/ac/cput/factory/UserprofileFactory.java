@@ -23,18 +23,12 @@ public class UserprofileFactory {
             LocalDateTime createdAt,
             Location location,
             Preference preference,
-            Set<Like> receivedLikes,
-            Set<Match> matchRequest,
-            Set<Match> matchedAccepted,
-            List<Swipe> swipes){
+            Set<Like> receivedLikes){
         if (profileID <= 0 || userID == null || Helper.isNullOrEmpty(interests) || createdAt == null) {
             return null;
         }
 
         receivedLikes = (receivedLikes == null) ? new HashSet<>() : receivedLikes;
-        matchRequest = (matchRequest == null) ? new HashSet<>() : matchRequest;
-        matchedAccepted = (matchedAccepted == null) ? new HashSet<>() : matchedAccepted;
-        swipes = (swipes == null) ? new ArrayList<>() : swipes;
 
         return new UserProfile.Builder()
                 .setProfileID(profileID)
@@ -45,9 +39,6 @@ public class UserprofileFactory {
                 .setLocation(location)
                 .setPreferenceID(preference)
                 .setReceivedLikes(receivedLikes)
-                .setMatchRequest(matchRequest)
-                .setMatchedAccepted(matchedAccepted)
-                .setSwipes(swipes)
                 .build();
     }
 
