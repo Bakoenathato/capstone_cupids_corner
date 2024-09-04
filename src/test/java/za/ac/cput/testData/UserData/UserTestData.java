@@ -24,7 +24,7 @@ public class UserTestData {
         }
 
         return new User.Builder()
-                .setUserId(1l)
+                .setUserId(100l)
                 .setUserName("Sonic")
                 .setPassword("Seg@")
                 .setEmail("sonic0@sega.example.com")
@@ -44,7 +44,7 @@ public class UserTestData {
         }
 
         return new User.Builder()
-                .setUserId(2l)
+                .setUserId(200l)
                 .setUserName("Tails")
                 .setPassword("MilesPrower")
                 .setEmail("tails1@sega.example.com")
@@ -66,7 +66,7 @@ public class UserTestData {
 
 
         return new User.Builder()
-                .setUserId(3l)
+                .setUserId(300l)
                 .setUserName("AmyRose")
                 .setPassword("PinkRose")
                 .setEmail("amy2@sega.example.com")
@@ -86,7 +86,7 @@ public class UserTestData {
             throw new RuntimeException(e);
         }
         return new User.Builder()
-                .setUserId(4l)
+                .setUserId(400l)
                 .setUserName("JewelThief")
                 .setPassword("Jewels1")
                 .setEmail("rouge@sega.example.com")
