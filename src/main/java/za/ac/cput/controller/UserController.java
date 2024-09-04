@@ -11,9 +11,9 @@ import za.ac.cput.util.LoginResponse;
 import java.util.List;
 
 @RestController
-//@CrossOrigin
+@CrossOrigin
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
 
 public class UserController {
     @Autowired
