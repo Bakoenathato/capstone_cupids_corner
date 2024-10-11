@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.User;
 import za.ac.cput.service.UserService;
-import za.ac.cput.util.LoginDTO;
-import za.ac.cput.util.LoginResponse;
+import za.ac.cput.dto.LoginDTO;
+import za.ac.cput.dto.LoginResponse;
 
 import java.util.List;
 

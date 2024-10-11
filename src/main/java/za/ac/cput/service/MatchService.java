@@ -10,11 +10,9 @@ package za.ac.cput.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Match;
-import za.ac.cput.domain.MatchStatus;
 import za.ac.cput.domain.User;
 import za.ac.cput.repository.MatchRepository;
 import za.ac.cput.repository.UserRepository;
-import za.ac.cput.repository.UserprofileRepository;
 
 import java.util.List;
 
@@ -32,8 +30,8 @@ public class MatchService implements IMatchService {
 
     @Override
     public Match create(Match match) {
-        profileRepository.save(match.getProfile1());
-        profileRepository.save(match.getProfile2());
+        profileRepository.save(match.getUser1Id());
+        profileRepository.save(match.getUser2Id());
         return matchRepository.save(match);
     }
 
@@ -44,8 +42,8 @@ public class MatchService implements IMatchService {
 
     @Override
     public Match update(Match match) {
-        profileRepository.save(match.getProfile1());
-        profileRepository.save(match.getProfile2());
+        profileRepository.save(match.getUser1Id());
+        profileRepository.save(match.getUser2Id());
         return matchRepository.save(match);
     }
 
@@ -62,16 +60,15 @@ public class MatchService implements IMatchService {
     @Override
     public Match createMatch(User profile1, User profile2) {
         // profile 1 has a lower id than profile 2 to maintain order
-        if ( profile1.getUserId() > profile2.getUserId() ) {
+        if ( profile1.getId() > profile2.getId() ) {
             User temp = profile1;
             profile1 = profile2;
             profile2 = temp;
         }
 
         Match match = new Match.Builder()
-                .setProfile1(profile1)
-                .setProfile2(profile2)
-                .setStatus(MatchStatus.PENDING)
+                .setUser1Id(profile1)
+                .setUser2Id(profile2)
                 .build();
 
         return matchRepository.save(match);
