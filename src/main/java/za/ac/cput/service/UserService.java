@@ -2,24 +2,24 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.ac.cput.domain.Match;
+import za.ac.cput.domain.PotentialMatch;
 import za.ac.cput.domain.User;
 import za.ac.cput.repository.UserRepository;
-import za.ac.cput.util.LoginDTO;
-import za.ac.cput.util.LoginResponse;
+import za.ac.cput.dto.LoginDTO;
+import za.ac.cput.dto.LoginResponse;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService implements IUserService{
+    private final UserRepository userRepository;
     private UserRepository repository;
 
     @Autowired
-    UserService(UserRepository repository){
+    UserService(UserRepository repository, UserRepository userRepository){
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
 
@@ -30,14 +30,15 @@ public class UserService implements IUserService{
             throw new IllegalArgumentException("There is already a user with this email in the system please try to login");
         }
         if (repository.findByUserName(user.getUserName()) != null) {
-            throw new IllegalArgumentException("There is already a user with this username please try anothor one or log in");
+            throw new IllegalArgumentException("There is already a user with this username please try another one or log in");
         }
         return repository.save(user);
     }
 
     @Override
-    public User read(Long userId){
-        return repository.findById(userId).orElse(null);
+    public User read(Long id) {
+        return repository.findById(id).orElseThrow(()-> new IllegalStateException("User with " +
+                "Id " + id + " does not exist"));
     }
 
     @Override
@@ -46,8 +47,8 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public void delete(Long userId) {
-        repository.deleteById(userId);
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 
     @Override

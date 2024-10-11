@@ -1,4 +1,4 @@
-package za.ac.cput.util;
+package za.ac.cput.dto;
 
 public class LoginDTO {
 

@@ -73,7 +73,7 @@ public class UserprofileFactory {
 //        Like like=LikeFactory.buildLike("1","01","001",LocalDateTime.now());
 ////        Match match=MatchFactory.buildMatch()
 //
-////        User userid=user.getUserId();
+////        User userid=user.getId();
 //        return new UserProfile.Builder().setProfileID(profileID).setUserID(user).setInterests(intrest).setProfile_visibility(profile_vis).setCreated_at(created_at).setLocationID(location1).setPreferenceID(prefernce).setLikes(like).build();
 //    }
 //    public static UserProfile createUser(String profileID, User userID, String interest, boolean profile_vis, LocalDateTime created_at, Location LocationID, Preference prefernceID, Like like){

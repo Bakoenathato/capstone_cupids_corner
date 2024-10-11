@@ -1,18 +1,14 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /*User.java
 User class
 Author Mihle Sivuyise Bontsi (222406917)
-Date 17 May 2024+
+Date 17 May 2024
 .
  */
 @Entity (name = "User")
@@ -20,7 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private long id;
     private String userName;
     private String password;
     private String email;
@@ -35,17 +31,17 @@ public class User {
     @Column(length = 100000)
     private byte[] displayImage;
 
-    @OneToMany(mappedBy = "profile1", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Match> matchRequest = new HashSet<>();
-
-    @OneToMany(mappedBy = "profile2", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Match> matchedAccepted = new HashSet<>();
-
-    @OneToMany(mappedBy = "swiper", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Swipe> swipesMade = new HashSet<>();
-
-    @OneToMany(mappedBy = "swiped", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Swipe> swipesReceived = new HashSet<>();
+//    @OneToMany(mappedBy = "user1", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Match> matchRequest = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "user2", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Match> matchedAccepted = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "swiper", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Swipe> swipesMade = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "swiped", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Swipe> swipesReceived = new HashSet<>();
 
 
 
@@ -53,7 +49,7 @@ public class User {
     }
 
     private User(Builder builder) {
-        this.userId = builder.userId;
+        this.id = builder.userId;
         this.userName = builder.userName;
         this.password = builder.password;
         this.email = builder.email;
@@ -65,8 +61,8 @@ public class User {
 
     }
 
-    public long getUserId() {
-        return userId;
+    public long getId() {
+        return id;
     }
     public String getUserName() {
         return userName;
@@ -95,29 +91,29 @@ public class User {
         return displayImage;
     }
 
-    public Set<Match> getAllMatches(){
-        Set<Match> allMatches = new HashSet<>(matchRequest);
-        allMatches.addAll(matchedAccepted);
-        return allMatches;
-    }
+//    public Set<Match> getAllMatches(){
+//        Set<Match> allMatches = new HashSet<>(matchRequest);
+//        allMatches.addAll(matchedAccepted);
+//        return allMatches;
+//    }
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return getUserId() == user.getUserId() && Objects.equals(getUserName(), user.getUserName()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && getGender() == user.getGender() && Objects.deepEquals(getDisplayImage(), user.getDisplayImage()) && Objects.equals(matchRequest, user.matchRequest) && Objects.equals(matchedAccepted, user.matchedAccepted) && Objects.equals(swipesMade, user.swipesMade) && Objects.equals(swipesReceived, user.swipesReceived);
+        return getId() == user.getId() && Objects.equals(getUserName(), user.getUserName()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && getGender() == user.getGender() && Objects.deepEquals(getDisplayImage(), user.getDisplayImage()) /*&& Objects.equals(matchRequest, user.matchRequest) && Objects.equals(matchedAccepted, user.matchedAccepted) && Objects.equals(swipesMade, user.swipesMade) && Objects.equals(swipesReceived, user.swipesReceived )*/;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getUserName(), getPassword(), getEmail(), getFirstName(), getLastName(), getGender(), Arrays.hashCode(getDisplayImage()), matchRequest, matchedAccepted, swipesMade, swipesReceived);
+        return Objects.hash(getId(), getUserName(), getPassword(), getEmail(), getFirstName(), getLastName(), getGender(), Arrays.hashCode(getDisplayImage()) /*, matchRequest, matchedAccepted, swipesMade, swipesReceived */);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
@@ -125,10 +121,10 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
                 ", displayImage=" + Arrays.toString(displayImage) +
-                ", matchRequest=" + matchRequest +
+                /*", matchRequest=" + matchRequest +
                 ", matchedAccepted=" + matchedAccepted +
                 ", swipesMade=" + swipesMade +
-                ", swipesReceived=" + swipesReceived +
+                ", swipesReceived=" + swipesReceived + */
                 '}';
     }
 
@@ -188,7 +184,7 @@ public class User {
         }
 
         public Builder copy(User user) {
-            this.userId = user.userId;
+            this.userId = user.id;
             this.userName = user.userName;
             this.password = user.password;
             this.email = user.email;
