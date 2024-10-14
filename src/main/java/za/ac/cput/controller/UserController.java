@@ -1,6 +1,7 @@
 package za.ac.cput.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.User;
@@ -48,6 +49,15 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
         LoginResponse loginResponse = userService.loginUser(loginDTO);
         return ResponseEntity.ok(loginResponse);
+    }
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<Void> delete(@PathVariable Long userId) {
+        try {
+            userService.delete(userId); // Assuming this service method deletes the user
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Return 204 if successful
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 if the user is not found
+        }
     }
 
 }
