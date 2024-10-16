@@ -1,4 +1,4 @@
-package za.ac.cput.service;
+package za.ac.cput.service.match;
 /*
     MatchingFactoryTest.java
     MatchingFactory class
@@ -6,8 +6,9 @@ package za.ac.cput.service;
     Date 19 May 2024
 */
 
-import za.ac.cput.domain.Match;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.match.Match;
+import za.ac.cput.domain.user.User;
+import za.ac.cput.service.IService;
 
 import java.util.List;
 

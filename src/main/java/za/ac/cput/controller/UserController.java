@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.ac.cput.domain.User;
-import za.ac.cput.service.UserService;
+import za.ac.cput.domain.user.User;
+import za.ac.cput.service.user.UserService;
 import za.ac.cput.dto.LoginDTO;
 import za.ac.cput.dto.LoginResponse;
 
@@ -54,10 +54,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
-        LoginResponse loginResponse = userService.loginUser(loginDTO);
-        return ResponseEntity.ok(loginResponse);
+    public String login(@RequestBody User user){
+        return userService.verify(user);
     }
+
+//    @PostMapping("/login")
+//    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
+//        LoginResponse loginResponse = userService.loginUser(loginDTO);
+//        return ResponseEntity.ok(loginResponse);
+//    }
+
+
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<Void> delete(@PathVariable Long userId) {
         try {

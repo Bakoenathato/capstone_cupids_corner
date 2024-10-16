@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import za.ac.cput.dto.MatchDTO;
 import za.ac.cput.dto.SwipeDTO;
-import za.ac.cput.service.PotentialMatchService;
+import za.ac.cput.service.match.PotentialMatchService;
 
 @RestController
 @RequestMapping("/api/potential-match")

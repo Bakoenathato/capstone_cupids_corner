@@ -1,7 +1,8 @@
-package za.ac.cput.service;
+package za.ac.cput.service.match;
 
 
-import za.ac.cput.domain.PotentialMatch;
+import za.ac.cput.domain.match.PotentialMatch;
+import za.ac.cput.service.IService;
 
 import java.util.List;
 

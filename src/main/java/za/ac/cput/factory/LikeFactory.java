@@ -1,7 +1,7 @@
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.Like;
-import za.ac.cput.domain.UserProfile;
+import za.ac.cput.domain.user.Like;
+import za.ac.cput.domain.user.UserProfile;
 
 import java.time.LocalDateTime;
 

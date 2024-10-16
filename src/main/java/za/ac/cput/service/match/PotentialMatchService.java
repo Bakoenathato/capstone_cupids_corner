@@ -1,17 +1,17 @@
-package za.ac.cput.service;
+package za.ac.cput.service.match;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.ac.cput.domain.Match;
-import za.ac.cput.domain.MatchStatus;
-import za.ac.cput.domain.PotentialMatch;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.match.Match;
+import za.ac.cput.domain.match.MatchStatus;
+import za.ac.cput.domain.match.PotentialMatch;
+import za.ac.cput.domain.user.User;
 import za.ac.cput.dto.MatchDTO;
 import za.ac.cput.dto.SwipeDTO;
 import za.ac.cput.factory.MatchFactory;
 import za.ac.cput.factory.PotentialMatchFactory;
 import za.ac.cput.repository.PotentialMatchRepository;
-import za.ac.cput.repository.UserRepository;
+import za.ac.cput.service.user.UserService;
 
 import java.util.List;
 import java.util.Optional;

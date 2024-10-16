@@ -1,7 +1,7 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.user.User;
 import za.ac.cput.testData.UserData.UserTestData;
 
 import static org.junit.jupiter.api.Assertions.*;

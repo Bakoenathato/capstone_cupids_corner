@@ -1,21 +1,14 @@
 package za.ac.cput.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 //import za.ac.cput.domain.DisplayImage;
-import za.ac.cput.domain.Gender;
-import za.ac.cput.domain.Match;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.match.Match;
 //import za.ac.cput.factory.DisplayImageFactory;
-import za.ac.cput.factory.MatchFactory;
-import za.ac.cput.factory.UserFactory;
-import za.ac.cput.service.MatchService;
-import za.ac.cput.testData.MatchTestData;
-import za.ac.cput.testData.UserData.UserProfileTestData;
+import za.ac.cput.service.match.MatchService;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

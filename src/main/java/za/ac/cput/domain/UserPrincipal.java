@@ -3,10 +3,12 @@ package za.ac.cput.domain;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import za.ac.cput.domain.user.Role;
+import za.ac.cput.domain.user.User;
 
-import java.security.Principal;
+
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class UserPrincipal implements UserDetails{
@@ -19,7 +21,14 @@ public class UserPrincipal implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(("USER")));
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        if (user.getUserRole() == Role.ADMIN) {
+            authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        } else {
+            authorities.add(new SimpleGrantedAuthority("USER"));
+        }
+        return authorities;
     }
 
     @Override

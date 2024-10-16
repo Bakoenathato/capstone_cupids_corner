@@ -3,7 +3,8 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.user.User;
+import za.ac.cput.service.user.UserService;
 import za.ac.cput.testData.UserData.UserTestData;
 
 import static org.junit.jupiter.api.Assertions.*;

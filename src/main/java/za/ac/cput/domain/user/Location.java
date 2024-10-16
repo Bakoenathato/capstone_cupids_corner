@@ -1,4 +1,4 @@
-package za.ac.cput.domain;
+package za.ac.cput.domain.user;
 
 // author: Uzziah Phumelela Ngogela
 // 222135654

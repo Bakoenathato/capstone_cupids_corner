@@ -1,13 +1,10 @@
 package za.ac.cput.factory;
 
 //import za.ac.cput.domain.DisplayImage;
-import za.ac.cput.domain.Gender;
-import za.ac.cput.domain.Role;
-import za.ac.cput.domain.User;
-import za.ac.cput.domain.UserProfile;
+import za.ac.cput.domain.user.Gender;
+import za.ac.cput.domain.user.Role;
+import za.ac.cput.domain.user.User;
 import za.ac.cput.util.Helper;
-
-import java.time.LocalDateTime;
 
 /*UserFactory.java
 UserFactory class

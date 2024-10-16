@@ -1,8 +1,6 @@
-package za.ac.cput.domain;
+package za.ac.cput.domain.user;
 
 import jakarta.persistence.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.Objects;

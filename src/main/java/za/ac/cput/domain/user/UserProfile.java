@@ -1,10 +1,10 @@
-package za.ac.cput.domain;
+package za.ac.cput.domain.user;
 
 import jakarta.persistence.*;
+import za.ac.cput.domain.match.Preference;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
