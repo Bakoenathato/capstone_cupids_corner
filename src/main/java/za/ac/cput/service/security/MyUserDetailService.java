@@ -21,13 +21,10 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String input) throws UsernameNotFoundException {
-        // check if input is an email or username
+        // check if input is username
         User user = userRepository.findByUserName(input);
         if (user == null) {
-            user = userRepository.findByEmail(input);
-            if (user == null) {
-                throw new UsernameNotFoundException("User not found with email or username" + input);
-            }
+            throw new UsernameNotFoundException("User not found with email or username" + input);
         }
         return new UserPrincipal(user);
     }
