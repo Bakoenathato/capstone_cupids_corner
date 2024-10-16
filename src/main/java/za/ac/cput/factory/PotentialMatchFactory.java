@@ -1,8 +1,8 @@
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.MatchStatus;
-import za.ac.cput.domain.PotentialMatch;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.match.MatchStatus;
+import za.ac.cput.domain.match.PotentialMatch;
+import za.ac.cput.domain.user.User;
 
 public class PotentialMatchFactory {
     public static PotentialMatch createPotentialMatch(User user1, User user2, MatchStatus matchStatus) {

@@ -1,4 +1,4 @@
-package za.ac.cput.service;
+package za.ac.cput.service.match;
 
 /*
     MatchingFactoryTest.java
@@ -9,13 +9,14 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.ac.cput.domain.Preference;
+import za.ac.cput.domain.match.Preference;
 import za.ac.cput.repository.PreferenceRepository;
+import za.ac.cput.service.user.IPreferenceService;
 
 import java.util.List;
 
 @Service
-public class PreferenceService implements IPreferenceService{
+public class PreferenceService implements IPreferenceService {
 
     private PreferenceRepository preferenceRepository;
 

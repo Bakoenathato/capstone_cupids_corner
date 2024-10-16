@@ -1,12 +1,14 @@
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.*;
+import za.ac.cput.domain.match.Preference;
+import za.ac.cput.domain.user.Like;
+import za.ac.cput.domain.user.Location;
+import za.ac.cput.domain.user.User;
+import za.ac.cput.domain.user.UserProfile;
 import za.ac.cput.util.Helper;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 //UserprofileFactory.java
 //UserProfile Factory class

@@ -6,9 +6,9 @@ package za.ac.cput.factory;
     Date 19 May 2024
 */
 
-import za.ac.cput.domain.Gender;
-import za.ac.cput.domain.Preference;
-import za.ac.cput.domain.UserProfile;
+import za.ac.cput.domain.user.Gender;
+import za.ac.cput.domain.match.Preference;
+import za.ac.cput.domain.user.UserProfile;
 
 public class PreferenceFactory {
 

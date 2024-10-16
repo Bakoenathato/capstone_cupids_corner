@@ -1,7 +1,7 @@
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.Location;
-import za.ac.cput.domain.UserProfile;
+import za.ac.cput.domain.user.Location;
+import za.ac.cput.domain.user.UserProfile;
 import za.ac.cput.util.Helper;
 
 public class LocationFactory {

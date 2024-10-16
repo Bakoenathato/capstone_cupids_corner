@@ -1,6 +1,7 @@
-package za.ac.cput.domain;
+package za.ac.cput.domain.match;
 
 import jakarta.persistence.*;
+import za.ac.cput.domain.user.User;
 
 import java.util.Objects;
 

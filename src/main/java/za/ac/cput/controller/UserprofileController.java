@@ -2,10 +2,9 @@ package za.ac.cput.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import za.ac.cput.domain.User;
-import za.ac.cput.domain.UserProfile;
-import za.ac.cput.service.UserService;
-import za.ac.cput.service.UserprofileService;
+import za.ac.cput.domain.user.UserProfile;
+import za.ac.cput.service.user.UserService;
+import za.ac.cput.service.user.UserprofileService;
 
 import java.util.List;
 

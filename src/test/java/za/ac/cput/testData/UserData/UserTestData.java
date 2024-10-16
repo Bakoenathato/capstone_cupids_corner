@@ -1,17 +1,14 @@
 package za.ac.cput.testData.UserData;
 
 //import za.ac.cput.domain.DisplayImage;
-import za.ac.cput.domain.Gender;
-import za.ac.cput.domain.Role;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.user.Gender;
+import za.ac.cput.domain.user.Role;
+import za.ac.cput.domain.user.User;
 //import za.ac.cput.factory.DisplayImageFactory;
-import za.ac.cput.factory.UserFactory;
-import za.ac.cput.util.Helper;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 
 
 public class UserTestData {

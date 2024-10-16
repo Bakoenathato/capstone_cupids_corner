@@ -3,10 +3,9 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.UserProfile;
+import za.ac.cput.domain.user.UserProfile;
+import za.ac.cput.service.user.UserprofileService;
 import za.ac.cput.testData.UserData.UserProfileTestData;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

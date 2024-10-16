@@ -2,10 +2,8 @@ package za.ac.cput.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import za.ac.cput.domain.Match;
-import za.ac.cput.domain.Preference;
-import za.ac.cput.service.MatchService;
-import za.ac.cput.service.PreferenceService;
+import za.ac.cput.domain.match.Preference;
+import za.ac.cput.service.match.PreferenceService;
 
 import java.util.List;
 

@@ -1,19 +1,12 @@
 package za.ac.cput.testData.UserData;
 
-import za.ac.cput.domain.Location;
-import za.ac.cput.domain.Preference;
-import za.ac.cput.domain.User;
-import za.ac.cput.domain.UserProfile;
-import za.ac.cput.factory.UserprofileFactory;
-import za.ac.cput.util.Helper;
+import za.ac.cput.domain.user.Location;
+import za.ac.cput.domain.match.Preference;
+import za.ac.cput.domain.user.User;
+import za.ac.cput.domain.user.UserProfile;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-
-import static za.ac.cput.testData.UserData.LocationTestData.*;
-import static za.ac.cput.testData.UserData.PreferenceTestData.*;
-import static za.ac.cput.testData.UserData.UserTestData.*;
 
 
 public class UserProfileTestData {

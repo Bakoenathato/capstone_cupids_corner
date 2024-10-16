@@ -7,8 +7,8 @@ package za.ac.cput.factory;
     Date 19 May 2024
 */
 
-import za.ac.cput.domain.Match;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.match.Match;
+import za.ac.cput.domain.user.User;
 
 public class MatchFactory {
     public static Match buildMatch(User user1Id, User user2Id) {

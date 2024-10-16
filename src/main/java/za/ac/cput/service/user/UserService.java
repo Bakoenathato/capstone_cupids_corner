@@ -1,27 +1,34 @@
-package za.ac.cput.service;
+package za.ac.cput.service.user;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import za.ac.cput.domain.PotentialMatch;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.UserPrincipal;
+import za.ac.cput.domain.user.Role;
+import za.ac.cput.domain.user.User;
 import za.ac.cput.repository.UserRepository;
-import za.ac.cput.dto.LoginDTO;
-import za.ac.cput.dto.LoginResponse;
+import za.ac.cput.service.security.JWTService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService implements IUserService{
 
     private UserRepository repository;
 
+    private AuthenticationManager authManager;
+
+    private JWTService jwtService;
+
     @Autowired
-    UserService(UserRepository repository) {
+    UserService(UserRepository repository, AuthenticationManager authManager, JWTService jwtService) {
         this.repository = repository;
+        this.authManager = authManager;
+        this.jwtService = jwtService;
     }
 
 
@@ -99,29 +106,45 @@ public class UserService implements IUserService{
                 .setLastName(userInput.getLastName())
                 .setGender(userInput.getGender())
                 .setDisplayImage(userInput.getDisplayImage())
+                .setUserRole(Role.USER)
                 .build();
 
         return repository.save(user);
     }
 
-    public LoginResponse loginUser(LoginDTO loginDTO) {
-        User user1 = repository.findByEmail(loginDTO.getEmail());
-        if (user1 != null) {
-            String password = loginDTO.getPassword();
-            String storedPassword = user1.getPassword();
-            if (password.equals(storedPassword)) {
-                Optional<User> user = repository.findOneByEmailAndPassword(loginDTO.getEmail(), storedPassword);
-                if (user.isPresent()) {
-                    return new LoginResponse("Login Success", true);
-                } else {
-                    return new LoginResponse("Login Failed", false);
-                }
-            } else {
-                return new LoginResponse("Password Not Match", false);
-            }
-        } else {
-            return new LoginResponse("Email not exists", false);
-        }
-    }
+//    public LoginResponse loginUser(LoginDTO loginDTO) {
+//        User user1 = repository.findByEmail(loginDTO.getEmail());
+//        if (user1 != null) {
+//            String password = loginDTO.getPassword();
+//            String storedPassword = user1.getPassword();
+//            if (password.equals(storedPassword)) {
+//                Optional<User> user = repository.findOneByEmailAndPassword(loginDTO.getEmail(), storedPassword);
+//                if (user.isPresent()) {
+//                    return new LoginResponse("Login Success", true);
+//                } else {
+//                    return new LoginResponse("Login Failed", false);
+//                }
+//            } else {
+//                return new LoginResponse("Password Not Match", false);
+//            }
+//        } else {
+//            return new LoginResponse("Email not exists", false);
+//        }
+//    }
 
+    public String verify(User user) {
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
+        if(authentication.isAuthenticated()) {
+            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            return jwtService.generateToken(userPrincipal.getUsername());
+        } else {
+            throw new RuntimeException("Authentication failed");
+        }
+
+//        if(authentication.isAuthenticated()) {
+//            return jwtService.generateToken(user.getUserName());
+//        } else {
+//            return null;
+//        }
+    }
 }

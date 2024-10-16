@@ -2,7 +2,7 @@ package za.ac.cput.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import za.ac.cput.domain.PotentialMatch;
+import za.ac.cput.domain.match.PotentialMatch;
 
 import java.util.Optional;
 

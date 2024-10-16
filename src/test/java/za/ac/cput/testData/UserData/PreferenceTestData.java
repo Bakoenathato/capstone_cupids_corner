@@ -1,8 +1,7 @@
 package za.ac.cput.testData.UserData;
 
-import za.ac.cput.domain.Gender;
-import za.ac.cput.domain.Preference;
-import za.ac.cput.factory.PreferenceFactory;
+import za.ac.cput.domain.user.Gender;
+import za.ac.cput.domain.match.Preference;
 
 public class PreferenceTestData {
 

@@ -1,4 +1,4 @@
-package za.ac.cput.domain;
+package za.ac.cput.domain.match;
 
 /*
     MatchingFactoryTest.java
@@ -8,6 +8,8 @@ package za.ac.cput.domain;
 */
 
 import jakarta.persistence.*;
+import za.ac.cput.domain.user.Gender;
+import za.ac.cput.domain.user.UserProfile;
 
 import java.util.Objects;
 

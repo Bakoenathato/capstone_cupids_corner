@@ -1,7 +1,6 @@
 package za.ac.cput.testData.UserData;
 
-import za.ac.cput.domain.Location;
-import za.ac.cput.factory.LocationFactory;
+import za.ac.cput.domain.user.Location;
 
 public class LocationTestData {
 

@@ -1,4 +1,4 @@
-package za.ac.cput.service;
+package za.ac.cput.service.match;
 
 /*
     MatchingFactoryTest.java
@@ -9,8 +9,8 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.ac.cput.domain.Match;
-import za.ac.cput.domain.User;
+import za.ac.cput.domain.match.Match;
+import za.ac.cput.domain.user.User;
 import za.ac.cput.repository.MatchRepository;
 import za.ac.cput.repository.UserRepository;
 
