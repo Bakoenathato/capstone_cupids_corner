@@ -1,6 +1,8 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -34,18 +36,21 @@ public class User {
     @Column(length = 100000)
     private byte[] displayImage;
 
-//    @OneToMany(mappedBy = "user1", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Set<Match> matchRequest = new HashSet<>();
-//
-//    @OneToMany(mappedBy = "user2", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Set<Match> matchedAccepted = new HashSet<>();
-//
-//    @OneToMany(mappedBy = "swiper", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Set<Swipe> swipesMade = new HashSet<>();
-//
-//    @OneToMany(mappedBy = "swiped", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Set<Swipe> swipesReceived = new HashSet<>();
+    /*
+     password encoder
+     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder(12);
+        @OneToMany(mappedBy = "user1", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        private Set<Match> matchRequest = new HashSet<>();
 
+        @OneToMany(mappedBy = "user2", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        private Set<Match> matchedAccepted = new HashSet<>();
+
+        @OneToMany(mappedBy = "swiper", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        private Set<Swipe> swipesMade = new HashSet<>();
+
+        @OneToMany(mappedBy = "swiped", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        private Set<Swipe> swipesReceived = new HashSet<>();
+    */
 
 
     protected User(){
@@ -68,6 +73,7 @@ public class User {
     public long getId() {
         return id;
     }
+
     public String getUserName() {
         return userName;
     }
@@ -75,6 +81,8 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+
     public String getEmail() {
         return email;
     }
@@ -104,6 +112,7 @@ public class User {
 //        allMatches.addAll(matchedAccepted);
 //        return allMatches;
 //    }
+
 
 
     @Override
@@ -144,7 +153,6 @@ public class User {
         private Gender gender;
         private byte[] displayImage;
         private Role userRole;
-
 
 
         public Builder setUserId(long userId) {
