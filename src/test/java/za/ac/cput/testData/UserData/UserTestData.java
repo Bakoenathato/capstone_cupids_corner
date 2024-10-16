@@ -2,6 +2,7 @@ package za.ac.cput.testData.UserData;
 
 //import za.ac.cput.domain.DisplayImage;
 import za.ac.cput.domain.Gender;
+import za.ac.cput.domain.Role;
 import za.ac.cput.domain.User;
 //import za.ac.cput.factory.DisplayImageFactory;
 import za.ac.cput.factory.UserFactory;
@@ -31,6 +32,7 @@ public class UserTestData {
                 .setFirstName("Ogilvie")
                 .setLastName("Hedgehog")
                 .setGender(Gender.MALE)
+                .setUserRole(Role.ADMIN)
                 .setDisplayImage(sonicImage)
                 .build();
     }
@@ -50,6 +52,7 @@ public class UserTestData {
                 .setFirstName("Miles")
                 .setLastName("Prower")
                 .setGender(Gender.MALE)
+                .setUserRole(Role.USER)
                 .setDisplayImage(tailsImage)
                 .build();
     }
@@ -71,6 +74,7 @@ public class UserTestData {
                 .setFirstName("Amy")
                 .setLastName("Rose")
                 .setGender(Gender.FEMALE)
+                .setUserRole(Role.USER)
                 .setDisplayImage(amyRoseImage)
                 .build();
     }
@@ -90,6 +94,7 @@ public class UserTestData {
                 .setFirstName("Rouge")
                 .setLastName("The Bat")
                 .setGender(Gender.FEMALE)
+                .setUserRole(Role.USER)
                 .setDisplayImage(rougeImage)
                 .build();
     }

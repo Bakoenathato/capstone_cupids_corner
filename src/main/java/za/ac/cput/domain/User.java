@@ -28,6 +28,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Enumerated(EnumType.STRING)
+    private Role userRole;
+
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(length = 100000)
@@ -62,6 +65,7 @@ public class User {
         this.lastName = builder.lastName;
         this.gender = builder.gender;
         this.displayImage = builder.displayImage;
+        this.userRole = builder.userRole;
 
 
     }
@@ -95,6 +99,10 @@ public class User {
         return gender;
     }
 
+    public Role getUserRole() {
+        return userRole;
+    }
+
     public byte[] getDisplayImage() {
         return displayImage;
     }
@@ -110,13 +118,14 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return getId() == user.getId() && Objects.equals(getUserName(), user.getUserName()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && getGender() == user.getGender() && Objects.deepEquals(getDisplayImage(), user.getDisplayImage()) /*&& Objects.equals(matchRequest, user.matchRequest) && Objects.equals(matchedAccepted, user.matchedAccepted) && Objects.equals(swipesMade, user.swipesMade) && Objects.equals(swipesReceived, user.swipesReceived )*/;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && gender == user.gender && userRole == user.userRole && Objects.deepEquals(displayImage, user.displayImage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUserName(), getPassword(), getEmail(), getFirstName(), getLastName(), getGender(), Arrays.hashCode(getDisplayImage()) /*, matchRequest, matchedAccepted, swipesMade, swipesReceived */);
+        return Objects.hash(id, userName, password, email, firstName, lastName, gender, userRole, Arrays.hashCode(displayImage));
     }
 
     @Override
@@ -129,11 +138,8 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
+                ", userRole=" + userRole +
                 ", displayImage=" + Arrays.toString(displayImage) +
-                /*", matchRequest=" + matchRequest +
-                ", matchedAccepted=" + matchedAccepted +
-                ", swipesMade=" + swipesMade +
-                ", swipesReceived=" + swipesReceived + */
                 '}';
     }
 
@@ -146,6 +152,7 @@ public class User {
         private String lastName;
         private Gender gender;
         private byte[] displayImage;
+        private Role userRole;
 
 
         public Builder setUserId(long userId) {
@@ -186,6 +193,11 @@ public class User {
             return this;
         }
 
+        public Builder setUserRole(Role userRole) {
+            this.userRole = userRole;
+            return this;
+        }
+
         public Builder setDisplayImage(byte[] displayImage) {
             this.displayImage = displayImage;
             return this;
@@ -200,6 +212,7 @@ public class User {
             this.lastName = user.lastName;
             this.gender = user.gender;
             this.displayImage = user.displayImage;
+            this.userRole = user.userRole;
             return this;
         }
 

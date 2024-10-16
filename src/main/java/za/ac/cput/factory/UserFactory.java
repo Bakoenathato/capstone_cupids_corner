@@ -2,6 +2,7 @@ package za.ac.cput.factory;
 
 //import za.ac.cput.domain.DisplayImage;
 import za.ac.cput.domain.Gender;
+import za.ac.cput.domain.Role;
 import za.ac.cput.domain.User;
 import za.ac.cput.domain.UserProfile;
 import za.ac.cput.util.Helper;
@@ -30,7 +31,7 @@ public class UserFactory {
 //                .build();
 //    }
     public static User buildUser(String userName, String password, String email, String firstName,
-                                 String lastName, Gender gender, byte[] displayImage) {
+                                 String lastName, Gender gender, Role userRole, byte[] displayImage) {
         if (Helper.isNullOrEmpty(userName) || Helper.isNullOrEmpty(password) || Helper.isNullOrEmpty(email) ||
                 Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName) ||
                 gender == null)
@@ -42,6 +43,7 @@ public class UserFactory {
                 .setEmail(email)
                 .setFirstName(firstName).setLastName(lastName)
                 .setGender(gender)
+                .setUserRole(userRole)
                 .setDisplayImage(displayImage)
                 .build();
 

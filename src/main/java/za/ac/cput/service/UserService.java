@@ -1,5 +1,6 @@
 package za.ac.cput.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,15 +43,34 @@ public class UserService implements IUserService{
                 "Id " + id + " does not exist"));
     }
 
+//    @Override
+//    public User update(User user){
+//        return repository.save(user);
+//    }
+//
+//    @Override
+//    public void delete(Long id) {
+//        repository.deleteById(id);
+//    }
+
     @Override
     public User update(User user){
-        return repository.save(user);
+        if (repository.existsById(user.getId())) {
+            return repository.save(user); // Perform the update if the user exists
+        } else {
+            throw new EntityNotFoundException("User not found with ID: " + user.getId());
+        }
     }
 
     @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public void delete(Long userId) {
+        if (repository.existsById(userId)) {
+            repository.deleteById(userId); // Delete user if found
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
     }
+
 
     @Override
     public List<User> getAll(){
