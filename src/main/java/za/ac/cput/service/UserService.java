@@ -1,6 +1,8 @@
 package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.PotentialMatch;
 import za.ac.cput.domain.User;
@@ -13,13 +15,12 @@ import java.util.Optional;
 
 @Service
 public class UserService implements IUserService{
-    private final UserRepository userRepository;
+
     private UserRepository repository;
 
     @Autowired
-    UserService(UserRepository repository, UserRepository userRepository){
+    UserService(UserRepository repository) {
         this.repository = repository;
-        this.userRepository = userRepository;
     }
 
 
@@ -54,6 +55,33 @@ public class UserService implements IUserService{
     @Override
     public List<User> getAll(){
         return repository.findAll();
+    }
+
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
+    public User register(User userInput) {
+        if (repository.findByEmail(userInput.getEmail()) != null) {
+            throw new IllegalArgumentException("There is already a user with this email in the system please try to login");
+        }
+        if (repository.findByUserName(userInput.getUserName()) != null) {
+            throw new IllegalArgumentException("There is already a user with this username please try another one or log in");
+        }
+
+        System.out.println("Raw password: " + userInput.getPassword());
+
+        String encodedPassword = encoder.encode(userInput.getPassword());
+
+        User user = new User.Builder()
+                .setUserName(userInput.getUserName())
+                .setEmail(userInput.getEmail())
+                .setPassword(encodedPassword)
+                .setFirstName(userInput.getFirstName())
+                .setLastName(userInput.getLastName())
+                .setGender(userInput.getGender())
+                .setDisplayImage(userInput.getDisplayImage())
+                .build();
+
+        return repository.save(user);
     }
 
     public LoginResponse loginUser(LoginDTO loginDTO) {

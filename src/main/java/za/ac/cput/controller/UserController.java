@@ -13,8 +13,6 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/user")
-//@CrossOrigin(origins = "http://localhost:5173")
-
 public class UserController {
     @Autowired
     private UserService userService;
@@ -42,6 +40,16 @@ public class UserController {
     @GetMapping("/getall")
     public List<User>getall(){
         return userService.getAll();
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User userInput){
+        try {
+            User createdUser = userService.register(userInput);
+            return ResponseEntity.ok(createdUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")
