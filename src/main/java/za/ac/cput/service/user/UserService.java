@@ -41,7 +41,23 @@ public class UserService implements IUserService{
         if (repository.findByUserName(user.getUserName()) != null) {
             throw new IllegalArgumentException("There is already a user with this username please try another one or log in");
         }
-        return repository.save(user);
+        System.out.println("Raw password: " + user.getPassword());
+
+        String encodedPassword = encoder.encode(user.getPassword());
+
+        User createUser = new User.Builder()
+                .setUserName(user.getUserName())
+                .setEmail(user.getEmail())
+                .setPassword(encodedPassword)
+                .setFirstName(user.getFirstName())
+                .setLastName(user.getLastName())
+                .setGender(user.getGender())
+                .setDisplayImage(user.getDisplayImage())
+                .setUserRole(user.getUserRole())
+                .build();
+
+        return repository.save(createUser);
+
     }
 
     @Override
@@ -146,5 +162,9 @@ public class UserService implements IUserService{
 //        } else {
 //            return null;
 //        }
+    }
+
+    public User readCurrent(String username) {
+        return repository.findByUserName(username);
     }
 }

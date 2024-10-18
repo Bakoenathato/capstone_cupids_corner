@@ -29,6 +29,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role userRole;
 
+    /*
+    * @ManyToMany
+    * private List<Preference> preference = new ArrayList();
+    *  */
+
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(length = 100000)
