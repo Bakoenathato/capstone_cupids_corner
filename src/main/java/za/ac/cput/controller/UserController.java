@@ -3,6 +3,9 @@ package za.ac.cput.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.user.User;
 import za.ac.cput.service.user.UserService;
@@ -15,10 +18,12 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
-    @PostMapping("/create")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PostMapping("/admin/create")
     public ResponseEntity<?> create(@RequestBody User user) {
         try {
             User createdUser = userService.create(user);
@@ -28,16 +33,30 @@ public class UserController {
         }
     }
 
-    @GetMapping("/read/{userId}")
-    public User read(@PathVariable long userId){
-        return userService.read(userId);
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @GetMapping("/read")
+    public ResponseEntity<?> readCurrent(Authentication authentication) {
+        String username = authentication.getName();
+
+        User user = userService.readCurrent(username);
+
+        return ResponseEntity.ok(user);
     }
 
+
+//    @PreAuthorize("hasAuthority('ROLE_USER')")
+//    @GetMapping("/read/{userId}")
+//    public User read(@PathVariable long userId){
+//        return userService.read(userId);
+//    }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/update")
     public User update(@RequestBody User user){
         return userService.update(user);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/getall")
     public List<User>getall(){
         return userService.getAll();
@@ -65,7 +84,8 @@ public class UserController {
 //    }
 
 
-    @DeleteMapping("/delete/{userId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @DeleteMapping("/admin/delete/{userId}")
     public ResponseEntity<Void> delete(@PathVariable Long userId) {
         try {
             userService.delete(userId); // Assuming this service method deletes the user

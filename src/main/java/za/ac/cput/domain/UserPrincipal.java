@@ -9,6 +9,7 @@ import za.ac.cput.domain.user.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class UserPrincipal implements UserDetails{
@@ -21,13 +22,33 @@ public class UserPrincipal implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        //return Collections.singletonList(new SimpleGrantedAuthority(user.getUserRole().getAuthority()));
+
+
+        /*
+        @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = user.getRole().getPermissions()
+            .stream()
+            .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+            .collect(Collectors.toList());
+
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+        return authorities;
+    }
+
+        * */
+
+//        return Collections.singletonList(new SimpleGrantedAuthority(user.getUserRole().name()));
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if (user.getUserRole() == Role.ADMIN) {
-            authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        if (user.getUserRole() == Role.USER) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + Role.USER.toString()));
         } else {
-            authorities.add(new SimpleGrantedAuthority("USER"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + Role.ADMIN.toString()));
         }
+        //System.out.println(authorities);
         return authorities;
     }
 
