@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>za.ac.cput</groupId>
-    <artifactId>testCupid</artifactId>
+    <artifactId>capstonecupid</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

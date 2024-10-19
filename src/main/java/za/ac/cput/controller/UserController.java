@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.user.User;
 import za.ac.cput.service.user.UserService;
@@ -33,7 +34,7 @@ public class UserController {
         }
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/read")
     public ResponseEntity<?> readCurrent(Authentication authentication) {
         String username = authentication.getName();
@@ -44,19 +45,20 @@ public class UserController {
     }
 
 
-//    @PreAuthorize("hasAuthority('ROLE_USER')")
-//    @GetMapping("/read/{userId}")
-//    public User read(@PathVariable long userId){
-//        return userService.read(userId);
-//    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/admin/read/{userId}")
+    public User read(@PathVariable long userId){
+        return userService.read(userId);
+    }
 
+    //@PreAuthorize("hasRole(
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/update")
     public User update(@RequestBody User user){
         return userService.update(user);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/getall")
     public List<User>getall(){
         return userService.getAll();
@@ -75,6 +77,13 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestBody User user){
         return userService.verify(user);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(){
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.ok("Logged out successfully");
     }
 
 //    @PostMapping("/login")
