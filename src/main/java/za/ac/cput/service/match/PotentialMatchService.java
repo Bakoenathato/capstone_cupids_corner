@@ -11,6 +11,7 @@ import za.ac.cput.dto.SwipeDTO;
 import za.ac.cput.factory.MatchFactory;
 import za.ac.cput.factory.PotentialMatchFactory;
 import za.ac.cput.repository.PotentialMatchRepository;
+import za.ac.cput.repository.UserRepository;
 import za.ac.cput.service.user.UserService;
 
 import java.util.List;
@@ -24,16 +25,16 @@ public class PotentialMatchService implements IPotentialMatchService {
 
     private MatchService matchService;
 
-    //private UserRepository userRepository;
+    private UserRepository userRepository;
     // UserRepository userRepository
 
     private UserService userService;
 
     @Autowired
-    public PotentialMatchService(PotentialMatchRepository potentialMatchRepository, MatchService matchService, UserService userService) {
+    public PotentialMatchService(PotentialMatchRepository potentialMatchRepository, MatchService matchService, UserService userService, UserRepository userRepository) {
         this.potentialMatchRepository = potentialMatchRepository;
         this.matchService = matchService;
-        //this.userRepository = userRepository;
+        this.userRepository = userRepository;
         this.userService = userService;
     }
 
@@ -81,16 +82,20 @@ public class PotentialMatchService implements IPotentialMatchService {
 
         if ("right".equalsIgnoreCase(swipe.getDirection())) {
             // check if there's an existing potential match in the opposite direction
-            Optional<PotentialMatch> existingMatch = potentialMatchRepository.findByUser1_IdAndUser2_Id(user1.getId(), user2.getId());
+            Optional<PotentialMatch> existingOppositeMatch = potentialMatchRepository.findByUser1_IdAndUser2_Id(user2.getId(), user1.getId());
 
-            if (existingMatch.isPresent() && existingMatch.get().getMatchStatus() == MatchStatus.PENDING) {
+//            if (!existingOppositeMatch.isPresent()) {
+//                existingOppositeMatch = potentialMatchRepository.findByUser1_IdAndUser2_Id(user2.getId(), user1.getId());
+//            }
+
+            if (existingOppositeMatch.isPresent() && existingOppositeMatch.get().getMatchStatus() == MatchStatus.PENDING) {
                 // both users have swiped right, create the match
                 Match newMatch = MatchFactory.buildMatch(user1, user2);
                 Match savedMatch = matchService.create(newMatch);
 
                 // update the existing match status
-                existingMatch.get().setMatchStatus(MatchStatus.MATCHED);
-                potentialMatchRepository.save(existingMatch.get());
+                existingOppositeMatch.get().setMatchStatus(MatchStatus.MATCHED);
+                potentialMatchRepository.save(existingOppositeMatch.get());
 
                 // create a new MatchDTO to return
                 return new MatchDTO(
@@ -99,13 +104,23 @@ public class PotentialMatchService implements IPotentialMatchService {
                         savedMatch.getUser2Id().getId()
                         );
             } else {
-                // create a new potential match
-                PotentialMatch newPotentialMatch = PotentialMatchFactory.createPotentialMatch(
+                Optional<PotentialMatch> existingMatch = potentialMatchRepository.findByUser1_IdAndUser2_Id(user1.getId(), user2.getId());
+
+                if(existingMatch.isEmpty()) {
+                    PotentialMatch newPotentialMatch = PotentialMatchFactory.createPotentialMatch(
                         user1, user2, MatchStatus.PENDING
                 );
 
                 potentialMatchRepository.save(newPotentialMatch);
                 }
+            }
+                // create a new potential match
+//                PotentialMatch newPotentialMatch = PotentialMatchFactory.createPotentialMatch(
+//                        user1, user2, MatchStatus.PENDING
+//                );
+//
+//                potentialMatchRepository.save(newPotentialMatch);
+//                }
             }
         else if ("left".equalsIgnoreCase(swipe.getDirection())) {
             // if swiped left we can reject the swiped user
