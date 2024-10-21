@@ -36,8 +36,13 @@ public class LocationService implements ILocationService {
     }
 
     @Override
-    public void delete(Long postalCode) {
-        repository.deleteById(postalCode);
+    public boolean delete(Long postalCode) {
+        if (repository.existsById(postalCode)) {
+            repository.deleteById(postalCode);
+            return true;
+        } else {
+            throw new IllegalStateException("Cannot delete postal code " + postalCode);
+        }
     }
 
     @Override

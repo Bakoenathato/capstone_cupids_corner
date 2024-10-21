@@ -86,13 +86,25 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public void delete(Long userId) {
+    public boolean delete(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id); // Delete user if found
+            return true;
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
+    }
+
+    /*
+    * @Override
+    public boolean delete(Long userId) {
         if (repository.existsById(userId)) {
             repository.deleteById(userId); // Delete user if found
         } else {
             throw new IllegalArgumentException("User not found");
         }
     }
+    * */
 
 
     @Override

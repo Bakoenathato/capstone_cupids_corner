@@ -40,6 +40,7 @@ public class SecurityConfig {
         return http.csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/user/login", "/user/register").permitAll()
+//                        .requestMatchers("/user/admin/delete/**").hasAuthority("ADMIN")
 //                        // USER role can access this endpoints
 //                        .requestMatchers("/api/potential-match/**", "/user/getall").hasAnyAuthority("ROLE_USER")
 //                        // ADMIN role can access this endpoints

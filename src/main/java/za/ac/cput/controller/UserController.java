@@ -52,7 +52,7 @@ public class UserController {
     }
 
     //@PreAuthorize("hasRole(
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/update")
     public User update(@RequestBody User user){
         return userService.update(user);
@@ -93,15 +93,19 @@ public class UserController {
 //    }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @DeleteMapping("/admin/delete/{userId}")
-    public ResponseEntity<Void> delete(@PathVariable Long userId) {
-        try {
-            userService.delete(userId); // Assuming this service method deletes the user
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Return 204 if successful
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 if the user is not found
-        }
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    @DeleteMapping("/admin/delete/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable long id, Authentication authentication) {
+        System.out.println(authentication.getAuthorities());
+        boolean deleteUser = userService.delete(id);
+        return new ResponseEntity<>(deleteUser, HttpStatus.OK);
+//        try {
+//            userService.delete(userId); // Assuming this service method deletes the user
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Return 204 if successful
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 if the user is not found
+//        }
     }
+
 
 }
