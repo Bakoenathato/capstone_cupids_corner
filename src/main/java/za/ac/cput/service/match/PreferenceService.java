@@ -41,8 +41,13 @@ public class PreferenceService implements IPreferenceService {
     }
 
     @Override
-    public void delete(Long preferenceId) {
-        preferenceRepository.deleteById(preferenceId);
+    public boolean delete(Long preferenceId) {
+        if (preferenceRepository.existsById(preferenceId)) {
+            preferenceRepository.deleteById(preferenceId);
+            return true;
+        } else {
+            throw new IllegalStateException("Preference with id " + preferenceId + " does not exist");
+        }
     }
 
     @Override

@@ -48,8 +48,15 @@ public class MatchService implements IMatchService {
     }
 
     @Override
-    public void delete(Long matchId) {
-        matchRepository.deleteById(matchId);
+    public boolean delete(Long matchId) {
+        if (matchRepository.existsById(matchId)) {
+            matchRepository.deleteById(matchId);
+            profileRepository.deleteById(matchId);
+            return true;
+        } else {
+            throw new IllegalStateException("Match with id " + matchId + " does not exist");
+        }
+//        matchRepository.deleteById(matchId);
     }
 
     @Override

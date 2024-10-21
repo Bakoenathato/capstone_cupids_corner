@@ -32,8 +32,13 @@ public class LikeService implements ILikeService {
     }
 
     @Override
-    public void delete(Long likeID) {
-        repository.deleteById(likeID);
+    public boolean delete(Long likeID) {
+        if(repository.existsById(likeID)) {
+            repository.deleteById(likeID);
+            return true;
+        } else {
+            throw new IllegalStateException("Like with ID " + likeID + " does not exist");
+        }
     }
 
 

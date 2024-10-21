@@ -31,8 +31,13 @@ public class UserprofileService implements IUserprofileService{
     }
 
     @Override
-    public void delete(Integer profileId) {
-        repository.deleteById(profileId);
+    public boolean delete(Integer profileId) {
+        if(repository.existsById(profileId)) {
+            repository.deleteById(profileId);
+            return true;
+        } else {
+            throw new IllegalStateException("Could not find profile with id: " + profileId);
+        }
     }
 
     @Override

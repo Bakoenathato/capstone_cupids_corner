@@ -11,7 +11,6 @@ import za.ac.cput.dto.SwipeDTO;
 import za.ac.cput.factory.MatchFactory;
 import za.ac.cput.factory.PotentialMatchFactory;
 import za.ac.cput.repository.PotentialMatchRepository;
-import za.ac.cput.repository.UserRepository;
 import za.ac.cput.service.user.UserService;
 
 import java.util.List;
@@ -25,16 +24,13 @@ public class PotentialMatchService implements IPotentialMatchService {
 
     private MatchService matchService;
 
-    private UserRepository userRepository;
-    // UserRepository userRepository
 
     private UserService userService;
 
     @Autowired
-    public PotentialMatchService(PotentialMatchRepository potentialMatchRepository, MatchService matchService, UserService userService, UserRepository userRepository) {
+    public PotentialMatchService(PotentialMatchRepository potentialMatchRepository, MatchService matchService, UserService userService) {
         this.potentialMatchRepository = potentialMatchRepository;
         this.matchService = matchService;
-        this.userRepository = userRepository;
         this.userService = userService;
     }
 
@@ -60,8 +56,13 @@ public class PotentialMatchService implements IPotentialMatchService {
     }
 
     @Override
-    public void delete(Long id) {
-        potentialMatchRepository.deleteById(id);
+    public boolean delete(Long id) {
+        if (potentialMatchRepository.existsById(id)){
+            potentialMatchRepository.deleteById(id);
+            return true;
+        } else {
+            throw new IllegalStateException("PotentialMatch with Id " + id + " does not exist");
+        }
     }
 
     @Override
